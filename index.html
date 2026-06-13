@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pocket Prints — Fun 3D Printed Toys & Trinkets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Variables ── */
+    :root {
+      --purple: #6A1485;
+      --purple-light: #8B1EAD;
+      --coral: #FF6B6B;
+      --cream: #FFF8F0;
+      --cream-dark: #F5EDE0;
+      --text: #2D1B33;
+      --text-light: #6B5578;
+      --white: #FFFFFF;
+      --shadow: 0 4px 24px rgba(106,20,133,0.12);
+      --radius: 20px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── Nav ── */
+    nav {
+      background: var(--white);
+      box-shadow: 0 2px 12px rgba(106,20,133,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 68px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-light);
+      font-weight: 700;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--purple); }
+
+    .nav-cta {
+      background: var(--coral);
+      color: var(--white) !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: 50px;
+      transition: transform 0.2s, background 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: #ff5252 !important;
+      transform: translateY(-1px);
+      color: var(--white) !important;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--purple) 0%, #9B27C4 100%);
+      color: var(--white);
+      padding: 2.5rem 2rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 300px; height: 300px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -60px;
+      width: 350px; height: 350px;
+      background: rgba(255,107,107,0.15);
+      border-radius: 50%;
+    }
+
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 3rem;
+      text-align: left;
+    }
+
+    .hero img.hero-logo {
+      width: 220px;
+      height: auto;
+      filter: brightness(0) invert(1) drop-shadow(0 8px 24px rgba(0,0,0,0.3));
+    }
+
+    .hero-text h1 { margin-bottom: 0.75rem; }
+    .hero-text p { margin-bottom: 0; }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 span { color: #FFD93D; }
+
+    .hero p {
+      font-size: 1.2rem;
+      font-weight: 600;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+
+    .btn-primary { background: var(--coral); color: var(--white); }
+    .btn-secondary { background: rgba(255,255,255,0.15); color: var(--white); border: 2px solid rgba(255,255,255,0.5); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.25); }
+
+    /* ── Wave divider ── */
+    .wave {
+      display: block;
+      width: 100%;
+      margin-bottom: -4px;
+    }
+
+    /* ── Section base ── */
+    section { padding: 5rem 2rem; }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: var(--coral);
+      color: var(--white);
+      font-weight: 800;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.9rem;
+      border-radius: 50px;
+      margin-bottom: 0.75rem;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 900;
+      color: var(--purple);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      font-weight: 600;
+      margin-bottom: 3rem;
+    }
+
+    /* ── Products ── */
+    #products { background: var(--white); }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .product-card {
+      background: var(--cream);
+      border-radius: var(--radius);
+      padding: 2rem 1.75rem;
+      transition: transform 0.25s, box-shadow 0.25s;
+      border: 2px solid transparent;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+      border-color: var(--purple-light);
+    }
+
+    .product-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .product-card h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--purple);
+      margin-bottom: 0.5rem;
+    }
+
+    .product-card p {
+      font-size: 0.97rem;
+      color: var(--text-light);
+      line-height: 1.65;
+      font-weight: 600;
+    }
+
+    .product-img-wrap {
+      width: 100%;
+      height: 200px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--cream-dark);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-badge {
+      display: inline-block;
+      margin-top: 1rem;
+      background: var(--purple);
+      color: var(--white);
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 0.25rem 0.8rem;
+      border-radius: 50px;
+    }
+
+    /* ── About ── */
+    #about { background: var(--cream-dark); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-image-wrap {
+      position: relative;
+    }
+
+    .about-photo {
+      width: 100%;
+      max-width: 400px;
+      height: 500px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: block;
+    }
+
+    .about-text h2 { margin-bottom: 0.75rem; }
+
+    .about-text p {
+      font-size: 1rem;
+      color: var(--text-light);
+      line-height: 1.8;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .fun-facts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .fun-fact {
+      background: var(--white);
+      border: 2px solid var(--purple-light);
+      color: var(--purple);
+      border-radius: 50px;
+      padding: 0.35rem 1rem;
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    /* ── How it works ── */
+    #how {
+      background: linear-gradient(135deg, var(--purple) 0%, #9B27C4 100%);
+      color: var(--white);
+      text-align: center;
+    }
+
+    #how h2 { color: var(--white); }
+    #how .section-subtitle { color: rgba(255,255,255,0.8); }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .step {
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+    }
+
+    .step-num {
+      background: var(--coral);
+      color: var(--white);
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem;
+    }
+
+    .step-icon { font-size: 2.5rem; display: block; margin-bottom: 0.75rem; }
+    .step h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.4rem; }
+    .step p { font-size: 0.92rem; opacity: 0.85; font-weight: 600; line-height: 1.55; }
+
+    /* ── Contact ── */
+    #contact { background: var(--white); text-align: center; }
+
+    .contact-box {
+      max-width: 560px;
+      margin: 0 auto;
+      background: var(--cream);
+      border-radius: var(--radius);
+      padding: 3rem 2.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-box .big-icon { font-size: 3.5rem; display: block; margin-bottom: 1rem; }
+
+    .contact-box h3 {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--purple);
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-box p {
+      color: var(--text-light);
+      font-weight: 600;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .email-link {
+      display: inline-block;
+      background: var(--purple);
+      color: var(--white);
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .email-link:hover {
+      background: var(--purple-light);
+      transform: translateY(-2px);
+    }
+
+    .contact-note {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-light);
+      font-weight: 600;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    footer span { color: var(--coral); }
+    footer img { height: 36px; vertical-align: middle; margin-right: 8px; filter: brightness(0) invert(1); opacity: 0.8; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .about-badge { right: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="logo.png" alt="Pocket Prints logo" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="https://forms.gle/oaEhLcJ2APX4yQNV8" target="_blank" class="nav-cta">Order Now</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <img src="logo.png" alt="Pocket Prints" class="hero-logo" />
+      <div class="hero-text">
+        <h1>Fun Toys That Fit in Your <span>Pocket</span></h1>
+        <p>3D printed clickers, fidget toys & bookmarks — handmade by an 11-year-old, designed to delight.</p>
+      </div>
+    </div>
+  </section>
+
+  <svg class="wave" viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path fill="#F5EDE0" d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z"/>
+  </svg>
+
+  <!-- About -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+
+        <div class="about-image-wrap">
+          <img src="photo.jpg" alt="Saanvi" class="about-photo" />
+        </div>
+
+        <div class="about-text">
+          <span class="section-tag">About Me</span>
+          <h2>Hi, I'm Saanvi!</h2>
+          <p>I'm an 11-year-old maker and the founder of Pocket Prints!</p>
+          <p>My 3D printing journey started when I was 8 years old and got a 3D printer as a birthday gift. From the moment I saw a real object appear layer by layer out of nothing, I was hooked. It felt like magic — and I've been creating ever since.</p>
+          <p>I started Pocket Prints because I wanted to make fun, pocket-sized toys and trinkets that kids would actually love carrying around. Every clicker, fidget toy, and bookmark I sell is printed by me, right at home, using professionally designed files I'm licensed to print and sell.</p>
+          <p>When I'm not printing, you can find me reading, playing the piano, playing sports, or doing science experiments with my fish cheering me on from his tank.</p>
+
+          <div class="fun-facts">
+            <span class="fun-fact">🐟 Fish owner</span>
+            <span class="fun-fact">🔬 Science lover</span>
+            <span class="fun-fact">🎹 Piano player</span>
+            <span class="fun-fact">⚽ Sports fan</span>
+            <span class="fun-fact">📚 Bookworm</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="products">
+    <div class="section-inner">
+      <span class="section-tag">What I Make</span>
+      <h2>My Products</h2>
+      <p class="section-subtitle">Everything is printed fresh by me — no factories, just one kid and a 3D printer.</p>
+
+      <div class="products-grid">
+
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="product-clicker.jpg" alt="Clicker" class="product-img" />
+          </div>
+          <h3>Clickers</h3>
+          <p>Satisfying push-button clickers that are perfect for fidgety fingers. Great for keeping hands busy in class or on the go.</p>
+          <span class="product-badge">Fan Favorite</span>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="product-fidget.jpg" alt="Fidget Toy" class="product-img" />
+          </div>
+          <h3>Fidget Toys</h3>
+          <p>Spinners, sliders, and more — designed to keep your hands happy. Small enough to fit in any pocket, big on fun.</p>
+          <span class="product-badge">Best for Focus</span>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="product-bookmark.jpg" alt="Bookmark" class="product-img" />
+          </div>
+          <h3>Bookmarks</h3>
+          <p>Cute and sturdy 3D printed bookmarks in fun shapes. Never lose your page again — in style!</p>
+          <span class="product-badge">Great Gift</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      <img src="logo.png" alt="" />
+      Made with ❤️ by <span>Saanvi</span> &nbsp;·&nbsp; &copy; 2026 Pocket Prints
+    </p>
+  </footer>
+
+</body>
+</html>
